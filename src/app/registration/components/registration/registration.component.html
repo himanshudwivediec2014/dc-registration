@@ -1,0 +1,191 @@
+<div class="row registration-content-wrapper m-0">
+  <div class="col">
+    <div class="h-100 d-flex justify-content-center align-items-center">
+      <div class="form-container">
+        <form [formGroup]="registrationForm" (ngSubmit)="submitDetails()">
+          <div class="form-controls profile-picture-preview">
+            <div class="image-preview">
+              <img class="profile-picture" [src]="imageUrl ? imageUrl : '../../../../../assets/images/person-icon.png'"
+                alt="Profile Picture">
+            </div>
+            <div class="custom-file">
+              <input type="file" accept="image/*" class="custom-file-input" id="customFile"
+                (change)="setImagePreview($event)">
+              <label class="custom-file-label" for="customFile"></label>
+              <span class="custom-label">Profile Picture</span>
+            </div>
+          </div>
+
+          <div class="form-controls email-control">
+            <label>Email</label>
+            <input type="text" formControlName="email" class="form-control" placeholder="Enter your email">
+            <span *ngIf="
+                registrationForm.controls.email.touched
+                && registrationForm.controls.email.dirty
+                && registrationForm.controls.email.invalid
+                && registrationForm.controls.email.errors
+                && registrationForm.controls.email.errors.required
+              " class="error-msg">This field is required!</span>
+            <span *ngIf="
+                registrationForm.controls.email.touched
+                && registrationForm.controls.email.dirty
+                && registrationForm.controls.email.invalid
+                && registrationForm.controls.email.errors
+                && registrationForm.controls.email.errors.email
+              " class="error-msg">Please enter a valid email!</span>
+          </div>
+
+          <div class="form-controls">
+            <label>Password</label>
+            <div class="input-group">
+              <input [type]="isPasswordVisible ? 'text' : 'password'" formControlName="password" class="form-control"
+                placeholder="Enter Password">
+              <span class="input-group-text">
+                <i class="fa" [ngClass]="isPasswordVisible ? 'fa-eye' : 'fa-eye-slash'"
+                  (click)="isPasswordVisible = !isPasswordVisible"></i>
+              </span>
+            </div>
+            <span *ngIf="
+                registrationForm.controls.password.touched
+                && registrationForm.controls.password.dirty
+                && registrationForm.controls.password.invalid
+                && registrationForm.controls.password.errors
+                && registrationForm.controls.password.errors.required
+              " class="error-msg">This field is required!</span>
+            <span *ngIf="
+                registrationForm.controls.password.touched
+                && registrationForm.controls.password.dirty
+                && registrationForm.controls.password.invalid
+                && registrationForm.controls.password.errors
+                && registrationForm.controls.password.errors.minlength
+              " class="error-msg">Enter a password with a min 8 characters.</span>
+          </div>
+
+          <div class="form-controls">
+            <label>Confirm Password</label>
+            <div class="input-group">
+              <input [type]="isConfirmPasswordVisible ? 'text' : 'password'" formControlName="confirmPassword"
+                class="form-control" placeholder="Re-enter your Password">
+              <span class="input-group-text">
+                <i class="fa" [ngClass]="isConfirmPasswordVisible ? 'fa-eye' : 'fa-eye-slash'"
+                  (click)="isConfirmPasswordVisible = !isConfirmPasswordVisible"></i>
+              </span>
+            </div>
+            <span *ngIf="
+                registrationForm.controls.confirmPassword.touched
+                && registrationForm.controls.confirmPassword.dirty
+                && registrationForm.controls.confirmPassword.invalid
+                && registrationForm.controls.confirmPassword.errors
+                && registrationForm.controls.confirmPassword.errors.required
+              " class="error-msg">This field is required!</span>
+            <span *ngIf="
+                registrationForm.controls.confirmPassword.touched
+                && registrationForm.controls.confirmPassword.dirty
+                && registrationForm.controls.confirmPassword.invalid
+                && registrationForm.controls.confirmPassword.errors
+                && registrationForm.controls.confirmPassword.errors.valueMismatch
+              " class="error-msg">Passwords do not match.</span>
+          </div>
+
+          <div class="w-100 d-flex justify-content-start align-items-center">
+            <div class="w-50 form-controls custom-half-width-control mt-3">
+              <label>Date of Birth</label>
+              <div class="input-group">
+                <input class="form-control" placeholder="dd/mm/yyyy" ngbDatepicker formControlName="dateOfBirth"
+                  #d="ngbDatepicker" readonly (click)="d.toggle()">
+                <div class="input-group-append">
+                  <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>
+                </div>
+              </div>
+              <span *ngIf="
+                  registrationForm.controls.dateOfBirth.touched
+                  && registrationForm.controls.dateOfBirth.dirty
+                  && registrationForm.controls.dateOfBirth.invalid
+                  && registrationForm.controls.dateOfBirth.errors
+                  && registrationForm.controls.dateOfBirth.errors.required
+                " class="error-msg">This field is required!</span>
+            </div>
+
+            <div class="w-50 form-controls">
+              <label>Gender</label>
+              <select class="form-select" formControlName="gender">
+                <option ngValue="">Select...</option>
+                <option *ngFor="let gender of gendersList" [value]="gender.value">{{ gender.name }}</option>
+              </select>
+              <span *ngIf="
+                registrationForm.controls.gender.touched
+                && registrationForm.controls.gender.dirty
+                && registrationForm.controls.gender.invalid
+                && registrationForm.controls.gender.errors
+                && registrationForm.controls.gender.errors.required
+              " class="error-msg">This field is required!</span>
+            </div>
+          </div>
+
+          <div class="d-flex">
+
+            <div class="w-50 custom-half-width-control form-controls d-flex flex-column">
+              <label>Mobile Number</label>
+              <input type="number" class="form-control" ng2TelInput formControlName="mobileNumber" />
+              <span *ngIf="
+                registrationForm.controls.mobileNumber.touched
+                && registrationForm.controls.mobileNumber.dirty
+                && registrationForm.controls.mobileNumber.invalid
+                && registrationForm.controls.mobileNumber.errors
+                && registrationForm.controls.mobileNumber.errors.required
+              " class="error-msg">This field is required!</span>
+            </div>
+
+            <div class="w-50 form-controls">
+              <div class="d-flex flex-column justify-content-center">
+                <label>Income</label>
+                <div class="d-flex">
+                  <select class="currency-dropdown" (change)="setSelectedCurrency($event)">
+                    <option *ngFor="let currency of currencies" [value]="currency.cc" class="dropdown-item">
+                      {{currency.cc}}
+                    </option>
+                  </select>
+                  <input type="number" formControlName="income" class="form-control" placeholder="Enter your income">
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-controls w-100">
+            <label>Hobbies</label>
+            <input type="text" formControlName="hobbies" class="form-control" placeholder="I like to...">
+          </div>
+
+          <div class="form-controls w-100">
+            <label>Address</label>
+            <textarea rows="4" cols="50" formControlName="address" class="form-control"
+              placeholder="Enter your address"></textarea>
+            <span *ngIf="
+                registrationForm.controls.address.touched
+                && registrationForm.controls.address.dirty
+                && registrationForm.controls.address.invalid
+                && registrationForm.controls.address.errors
+                && registrationForm.controls.address.errors.required
+              " class="error-msg">This field is required!</span>
+          </div>
+
+          <div class="form-controls">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" [checked]="isAgreed" (change)="setIsAgreed($event.target)"
+                id="flexCheckDefault">
+              <label class="form-check-label" for="flexCheckDefault">
+                I Agree with <a>Terms & Conditions</a>
+              </label>
+            </div>
+          </div>
+        </form>
+
+        <div class="d-flex justify-content-center align-items-center mt-3 mb-3">
+          <button [disabled]="registrationForm.invalid || !isAgreed" type="submit" class="btn btn-outline-success"
+            (click)="submitDetails()">Register</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
