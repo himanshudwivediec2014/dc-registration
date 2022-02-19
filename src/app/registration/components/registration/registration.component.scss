@@ -1,11 +1,8 @@
 .registration-content-wrapper {
-  //height: 100vh;
   width: 100%;
   background-image: linear-gradient(45deg, #d9acc7, #8dadc5);
 
   .form-container {
-    /*width: 200px;
-    height: 300px;*/
     min-width: 40vw;
     margin: 40px 0;
     padding: 20px;
@@ -14,12 +11,24 @@
     box-shadow: -5px 5px 5px 0px rgb(0 0 0 / 30%);
     border-radius: 3px;
 
+    @media only screen and (max-width: 991px) {
+      min-width: 60vw;
+    }
+
+    @media only screen and (max-width: 767px) {
+      min-width: 80vw;
+    }
+
     form {
       position: relative;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: flex-start;
+
+      @media only screen and (max-width: 575px) {
+        align-items: center;
+      }
 
       .form-controls {
         margin-bottom: 15px;
@@ -75,7 +84,6 @@
           .custom-file-input {
             position: relative;
             z-index: 2;
-            //width: 100%;
             height: 38px;
             margin: 0;
             opacity: 0;
@@ -144,6 +152,27 @@
       .custom-half-width-control {
         max-width: 274px;
         margin-right: 20px;
+
+        @media only screen and (max-width: 575px) {
+          max-width: 100%;
+          margin-right: 0;
+        }
+      }
+
+      .custom-full-width-control {
+        @media only screen and (max-width: 575px) {
+          min-width: 100%;
+          
+          .input-group {
+            min-width: 100%;
+          }
+        }
+      }
+
+      .custom-full-width-control.email-control {
+        @media only screen and (max-width: 575px) {
+          min-width: 100% !important;
+        }
       }
 
       .form-controls.profile-picture-preview {
@@ -164,6 +193,12 @@
             width: 100%;
             height: 93%;
           }
+        }
+
+        @media only screen and (max-width: 575px) {
+          position: relative;
+          right: unset;
+          top: unset;
         }
       }
 
