@@ -2,6 +2,9 @@
   <div class="col">
     <div class="h-100 d-flex justify-content-center align-items-center">
       <div class="form-container">
+        <h3 class="page-title mb-4">
+          Digital Chameleon Registration
+        </h3>
         <form [formGroup]="registrationForm" (ngSubmit)="submitDetails()">
           <div class="form-controls profile-picture-preview">
             <div class="image-preview">
@@ -90,7 +93,7 @@
           <div class="w-100 d-flex flex-column flex-sm-row justify-content-start align-items-center">
             <div class="w-100 w-sm-50 form-controls custom-half-width-control mt-3">
               <label>Date of Birth</label>
-              <div class="input-group custom-full-width-control">
+              <div class="input-group custom-full-width-control w-100">
                 <input class="form-control" placeholder="dd/mm/yyyy" ngbDatepicker formControlName="dateOfBirth"
                   #d="ngbDatepicker" readonly (click)="d.toggle()">
                 <div class="input-group-append">

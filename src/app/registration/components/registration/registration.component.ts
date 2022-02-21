@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {CURRENCIES} from "../../../shared/constants/world-currencies";
-import {COUNTRY_CODES} from "../../../shared/constants/country-codes";
-import {CountryCodeModel} from "../../../shared/models/country-code.model";
-import {CurrencyModel} from "../../../shared/models/currency.model";
-import {ValidationService} from "../../../shared/services/validation.service";
-import {GENDERS} from "../../../shared/constants/genders";
-import {GendersModel} from "../../../shared/models/genders.model";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { CURRENCIES } from "../../../shared/constants/world-currencies";
+import { COUNTRY_CODES } from "../../../shared/constants/country-codes";
+import { CountryCodeModel } from "../../../shared/models/country-code.model";
+import { CurrencyModel } from "../../../shared/models/currency.model";
+import { ValidationService } from "../../../shared/services/validation.service";
+import { GENDERS } from "../../../shared/constants/genders";
+import { GendersModel } from "../../../shared/models/genders.model";
 
 @Component({
   selector: 'app-registration',
@@ -70,7 +70,6 @@ export class RegistrationComponent implements OnInit {
   }
 
   setIsAgreed(elem: any) {
-    console.log(elem.checked);
     this.isAgreed = elem.checked;
   }
 
